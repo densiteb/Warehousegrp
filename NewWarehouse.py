@@ -33,8 +33,8 @@ for products in productid:
     else:
         conflictingid.append(hashvalue)
 
-for i in allid:
-    print(conflictingid.count(i))
+print(len(allid))
+print(len(conflictingid))
 
 
 
