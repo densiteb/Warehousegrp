@@ -5,8 +5,8 @@ wnum = 0
 firstnum = 0
 secondnum = 0
 productid = []
-allid = []
-conflictingid = []
+convertedid = []
+hashindex = []
 for first in alpha:
     alphab = first
     wnum = 0
@@ -19,29 +19,10 @@ for first in alpha:
             for locate in range(10):
                 secondnum += 1
                 productid.append(first + str(wnum) + str(firstnum) + str(secondnum))
+                convertedid.append(str(ord(first)) + str(wnum) + str(firstnum) + str(secondnum))
             secondnum = -1
         firstnum = -1
-
-for products in productid:
-    hashvalue = 0
-    for letters in products:
-        ascii = ord(letters)
-        hashvalue += ascii
-    hashvalue = hashvalue 
-    if hashvalue not in allid:
-        allid.append(hashvalue)
-    else:
-        conflictingid.append(hashvalue)
-
-print(len(allid))
-print(len(conflictingid))
-
-
-
-
-
-
+ 
+ #-65%19 hash function
 
     
-
-
