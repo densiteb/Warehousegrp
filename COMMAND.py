@@ -1,3 +1,4 @@
+import Conveyerbelt2
 class winput:
     def __init__(self , _ID):
         self.command=_ID
@@ -18,6 +19,7 @@ class winput:
             link.Search(link)
         elif self.command[0] == "9":
             link.Maunual(link)
+    
     def Retrieve(self , link):
         #if retrieve warehouse1:
             self.belt.remove(self.robot)
@@ -178,5 +180,5 @@ class winput:
         print ("Maunual")
 
 
-link = winput("9A125")
+link = winput("1A125")
 link.Scan(link)
