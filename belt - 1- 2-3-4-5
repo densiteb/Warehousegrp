@@ -1,0 +1,28 @@
+def condition(product_id):
+    if product_id in '''warehouse1''':
+        print ("Moving from belt to warehouse1")
+        print ("Moving from warehouse1 to belt")
+        print ("FIN")
+    elif product_id in '''warehouse2''':
+        print("Moving from belt to warehouse2")
+        print("Moving from warehouse2 to belt")
+        print("FIN")
+    elif product_id in '''warehouse3''':
+        print("Moving from belt to warehouse3")
+        print("Moving from warehouse3 to belt")
+        print("FIN")
+    elif product_id in '''warehouse4''':
+        print("Moving from belt to warehouse1")
+        print("Moving from warehouse1 to warehouse2")
+        print("Moving from warehouse2 to warehouse4")
+        print("Moving from warehouse4 to warehouse2")
+        print("Moving from warehouse2 to warehouse1")
+        print("Moving from warehouse1 to belt")
+        print("FIN")
+    elif product_id in '''warehouse5''':
+        print("Moving from belt to warehouse1")
+        print("Moving from warehouse1 to warehouse2")
+        print("Moving from warehouse2 to warehouse5")
+        print("Moving from warehouse5 to warehouse2")
+        print("Moving from warehouse2 to warehouse1")
+        print("Moving from warehouse1 to belt")
