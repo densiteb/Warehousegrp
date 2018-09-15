@@ -37,7 +37,9 @@ class Warehouse:
         print(pandas.DataFrame(self.warehouse5))
 
 '''w = Warehouse()
-w.createAllWarehouse()'''
+w.createAllWarehouse()
+w.warehouse5[19][19][19] = 'Y599'
+w.outputwarehouse()'''
 
 
 

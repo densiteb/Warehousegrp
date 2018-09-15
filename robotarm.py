@@ -23,8 +23,8 @@ class Barcode:
         if self.position not in self.existingPos:
             self.memory[self.ProductID] = self.position
             self.existingPos.append(self.position)
-            return(0)
-            #print('Storing successful')
+        else:
+            return 0
 
     def StoreWarehouse1(self):
         wnum = 1
@@ -108,8 +108,7 @@ class Barcode:
                 if self.position in self.existingPos:
                     self.position = str(wnum) + '0' + str(int(ID[1])+1) + '0' + str(int(ID[2])//4) + '0' + str(int(ID[3])//4)
         if self.position in self.existingPos:
-            return(0)
-            #print('Slot is occupied.Cannot store the product.')
+            return True
             
                 
                 
@@ -120,13 +119,4 @@ class Barcode:
 
 for ids in NW.generateProduct():
     c.ConvertProductID(ids)
-print(c.memory['Y599'])'''
-
-
-    
-        
-
-        
-        
-        
-        
+print(c.memory['Y599'])   '''  
