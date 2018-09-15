@@ -1,0 +1,7 @@
+from collections import deque
+list = deque(["product1","product2","product3","product4","product5","product6"])
+list.append("product x ")
+for i in list:
+    print(i)
+
+print(list.popleft()) #print the first order 1 order
