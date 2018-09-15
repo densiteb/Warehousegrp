@@ -3,6 +3,7 @@ class Decoder:
     def __init__(self,ProductLocation):
         self.location = ProductLocation
         self.wnum = ProductLocation[0]
+        self.rownum
         self.Row = 0
         self.Y = 0
         self.X = 0
@@ -29,8 +30,13 @@ class Decoder:
         else:
             self.X = int(self.location[5:7])
 
-'''d=Decoder('5201919')
-print(d.wnum,d.Row,d.Y,d.X)'''
+    def decodeRownum(self):
+        if self.location[2] > self.location[3]:
+            self.rownum = int(self.location[2:4]) - 1
+        else:
+            self.rownum = int(self.location[3])
+
+
 
 
 

@@ -2,16 +2,19 @@ from Conveyerbelt2 import conveyerbelt
 from Mainwarehouse import Warehouse
 from robotarm import Barcode
 from Decoder import Decoder
+from Reference import Referto
 import string
 
 class Commands:
     
     def __init__(self):
         self.Code = ''
+        self.alpha = string.ascii_uppercase.replace('Z','')
         self.c = conveyerbelt()
         self.w = Warehouse()
         self.w.createAllWarehouse()
         self.b = Barcode()
+        self.ref = Referto()
         self.command()
 
     def command(self):
@@ -22,8 +25,6 @@ class Commands:
         self.__VerifyCommand__()
 
     def __VerifyCommand__(self):
-        letters = string.ascii_uppercase.replace('Z','')
-        Verify = list(self.Code)
         if len(self.Code) == 0:
             print('No command.')
             self.command()
@@ -31,23 +32,23 @@ class Commands:
 
     def DetectCommands(self):
         Code = self.Code[0]
-        if Code == '0':
+        if Code == '0' and len(self.Code) == 5 and self.Code[1] in self.alpha:
             self.Retrieve()
-        elif Code == '1':
+        elif Code == '1' and len(self.Code) == 5 and self.Code[1] in self.alpha:
             self.Store()
-        elif Code == '2':
+        elif Code == '2' and len(self.Code) == 6 and self.Code[4] == '0' and self.Code[5] == '0':
             self.Sort()
         elif Code == '3':
             self.RetrieveBelt()
         elif Code == '4':
             self.Output()
-        elif Code == '5':
+        elif Code == '5' and len(self.Code) == 5 and self.Code[1] in self.alpha:
             self.Search()
-        elif Code == '9':
+        elif Code == '9' and len(self.Code) == 12 and self.Code[1] in self.alpha:
             self.Manual()
         else:
             print('Command is not recognized')
-            self.command()
+        self.command()
 
     def Retrieve(self):
         ware = self.w
@@ -140,13 +141,13 @@ class Commands:
             self.command()
         position = self.b.memory[productid]
         d = Decoder(position)
-        if position[0] == '1':
+        if position[0] == '1' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse1[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
             print('Storing a product id ' + productid + ' in Warehouse A: row '+ str(int(d.Row)) + ' slot ' + str(d.X))
             print('Moving from A to Start')
             print('Storing Successfully!')
-        elif position[0] == '2':
+        elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse2[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
             print('Moving from A to B')
@@ -154,7 +155,7 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
-        elif position[0] == '3':
+        elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse3[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
             print('Moving from A to C')
@@ -162,7 +163,7 @@ class Commands:
             print('Moving from C to A' )
             print('Moving from A to Start')
             print('Storing Successfully!')
-        elif position[0] == '4':
+        elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
             ware.warehouse4[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
             print('Moving from A to B')
@@ -172,7 +173,7 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
-        elif position[0] == '5':
+        elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
             ware.warehouse5[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
             print('Moving from A to B')
@@ -182,18 +183,37 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
+        else:
+            print('Command is not recognized1')
         self.command()
     
     def Sort(self):
-        print('ok2')
+        ware = self.w
+        warenum = self.Code[1]
+        rownum = int(self.Code[2])
+        products = []
+        if warenum == '1':
+            for productid in ware.warehouse1[rownum]:
+                print(productid)
+        elif warenum == '2':
+            ware.warehouse2[d.Row]
+        elif warenum == '3':
+            ware.warehouse3[d.Row]
+        elif warenum == '4':
+            ware.warehouse4[d.Row]
+        elif warenum == '5':
+            ware.warehouse5[d.Row]
+        
+        
 
     def RetrieveBelt(self):
         if self.Code == '30000':
+            item = self.c.retrievebelt()
             if self.c.size() > 0:
                 print('Retrieve a product with id ' + self.c.items[-1] + ' from the belt.')
-                self.c.retrievebelt()
+                del self.b.memory[item]
                 print('The belt now has ' + str(self.c.size()) + ' products on the line.')
-                del self.b.memory[self.c.retrievebelt()]
+                
             elif self.c.size() <= 0:
                 print('The belt is empty. Cannot retrieve product from the belt.')
         else:
@@ -208,13 +228,59 @@ class Commands:
         self.command()
     
     def Search(self):
-        if self.b.memory[self.Code[1:]]:
-            position = self.b.memory[self.Code[1:]]
+        productid = self.Code[1:]
+        if  productid not in self.b.memory or productid in self.c.items:
+            print('Product not found.')
+            self.command()
+        elif self.b.memory[productid]:
+            position = self.b.memory[productid]
             d = Decoder(position)
-            print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(d.Row) + ' X:' + str(d.X) + ' Y:' + str(d.Y)) 
+            print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(d.Row) + ' X:' + str(d.X) + ' Y:' + str(d.Y))
+        else:
+            print('Product not found.')
+        self.command()
     
     def Manual(self):
-        print('ok9')
+        ware = self.w
+        productid = self.Code[1:5]
+        newpos = self.Code[5:]
+        if productid in self.b.memory and newpos not in self.b.existingPos:
+            position = self.b.memory[productid]
+            d = Decoder(position)
+            if position[0] == '1':
+                ware.warehouse1[d.Row][d.Y][d.X] = ''
+            elif position[0] == '2':
+                ware.warehouse2[d.Row][d.Y][d.X] = ''
+            elif position[0] == '3':
+                ware.warehouse3[d.Row][d.Y][d.X] = ''
+            elif position[0] == '4':
+                ware.warehouse4[d.Row][d.Y][d.X] = ''
+            elif position[0] == '5':
+                ware.warehouse5[d.Row][d.Y][d.X] = ''
+            self.b.existingPos.remove(position)
+            self.b.memory[productid] = newpos
+            d2 = Decoder(newpos)
+            if  position[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
+            elif position[0] == '2' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                ware.warehouse2[d2.Row][d2.Y][d2.X] = productid
+            elif position[0] == '3' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                ware.warehouse3[d2.Row][d2.Y][d2.X] = productid
+            elif position[0] == '4' and d2.Row in range(7) and d2.Y in range(6) and d2.X in range(6):
+                ware.warehouse4[d2.Row][d2.Y][d2.X] = productid
+            elif position[0] == '5' and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
+                ware.warehouse5[d2.Row][d2.Y][d2.X] = productid
+            self.b.existingPos.append(newpos)
+            print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Y:' + str(d2.Y) + ' X:' + str(d2.X))
+        else:
+            print('Slot is occupied. Failed to move')
+        self.command()
+               
+
+            
+
+
+        
 
 c = Commands()
 
