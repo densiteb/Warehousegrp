@@ -36,6 +36,9 @@ class Warehouse:
         print(pandas.DataFrame(self.warehouse4))
         print(pandas.DataFrame(self.warehouse5))
 
+'''w = Warehouse()
+w.createAllWarehouse()'''
+
 
 
 
