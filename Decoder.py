@@ -3,20 +3,24 @@ class Decoder:
     def __init__(self,ProductLocation):
         self.location = ProductLocation
         self.wnum = ProductLocation[0]
-        self.rownum
+        self.rownum = 0
         self.Row = 0
         self.Y = 0
         self.X = 0
-        self.decodeRow()
-        self.decodeX()
-        self.decodeY()
+        if len(ProductLocation) == 6:
+            self.decodeRownum()
+        else:
+            self.decodeRow()
+            self.decodeX()
+            self.decodeY()
+        
 
     
     def decodeRow(self):
-        if self.location[1] > self.location[2]:
-            self.Row = int(self.location[1:3]) - 1
-        else:
+        if self.location[1] == '0':
             self.Row = int(self.location[2]) - 1
+        else:
+            self.Row = int(self.location[1:3]) - 1
 
     def decodeY(self):
         if self.location[3] == '0':
@@ -31,12 +35,10 @@ class Decoder:
             self.X = int(self.location[5:7])
 
     def decodeRownum(self):
-        if self.location[2] > self.location[3]:
-            self.rownum = int(self.location[2:4]) - 1
+        if self.location[2] == '0':
+            self.rownum = int(self.location[3]) - 1
         else:
-            self.rownum = int(self.location[3])
-
-
+            self.rownum = int(self.location[2:4]) - 1
 
 
 
