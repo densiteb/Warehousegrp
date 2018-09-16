@@ -147,6 +147,7 @@ class Commands:
             print('Storing a product id ' + productid + ' in Warehouse A: row '+ str(int(d.Row)) + ' slot ' + str(d.X))
             print('Moving from A to Start')
             print('Storing Successfully!')
+
         elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse2[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
@@ -155,6 +156,7 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
+
         elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse3[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
@@ -163,6 +165,7 @@ class Commands:
             print('Moving from C to A' )
             print('Moving from A to Start')
             print('Storing Successfully!')
+
         elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
             ware.warehouse4[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
@@ -173,6 +176,7 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
+
         elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
             ware.warehouse5[d.Row][d.Y][d.X] = productid
             print('Moving from Belt to A')
@@ -183,6 +187,7 @@ class Commands:
             print('Moving from B to A')
             print('Moving from A to Start')
             print('Storing Successfully!')
+            
         else:
             print('Command is not recognized')
         self.command()
@@ -194,10 +199,7 @@ class Commands:
         ref = self.ref.reference
         rownum = d.rownum
         products = []
-        if rownum not in range(10):
-            print('That row does not exist.')
-            self.command()
-        if warenum == '1':
+        if warenum == '1' and rownum in range(10):
             for productid in ware.warehouse1[rownum]:
                 for items in productid:
                     if items != '':
@@ -235,8 +237,9 @@ class Commands:
                 else:
                     pass
             products.clear()
-            print('Sorting process for warehouse A is complete.')      
-        elif warenum == '2':
+            print('Sorting process for warehouse A is complete.') 
+
+        elif warenum == '2' and rownum in range(10):
             for productid in ware.warehouse2[rownum]:
                 for items in productid:
                     if items != '':
@@ -259,29 +262,145 @@ class Commands:
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
-                    self.b.existingPos.append(refpos)                    
-                    if dref[0] == '1':    
+                    self.b.existingPos.append(refpos)         
+                    if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
-                    elif dref[0] == '2':
+                    elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
-                    elif dref[0] == '3':
+                    elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
-                    elif dref[0] == '4':
-                        ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
-                    elif dref[0] == '5':
-                        ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        print(1)
+                    elif refpos[0] == '4':
+                        ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '5':
+                        ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                else:
+                    pass
             products.clear()
             print('Sorting process for warehouse B is complete.')
-        elif warenum == '3':
-            ware.warehouse3[d.Row]
-        elif warenum == '4':
-            ware.warehouse4[d.Row]
-        elif warenum == '5':
-            ware.warehouse5[d.Row]
+
+        elif warenum == '3' and rownum in range(10):
+            for productid in ware.warehouse3[rownum]:
+                for items in productid:
+                    if items != '':
+                        products.append(items)
+            for ids in products:
+                refpos = ref[ids]
+                dref = Decoder(refpos)
+                position = self.b.memory[ids]
+                if dref not in self.b.existingPos:
+                    d = Decoder(position)
+                    if position[0] == '1':
+                        ware.warehouse1[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '2':
+                        ware.warehouse2[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '3':
+                        ware.warehouse3[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '4':
+                        ware.warehouse4[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '5':
+                        ware.warehouse5[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[ids] = refpos
+                    self.b.existingPos.append(refpos)         
+                    if refpos[0] == '1':    
+                        ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '2':
+                        ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '3':
+                        ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        print(1)
+                    elif refpos[0] == '4':
+                        ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '5':
+                        ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                else:
+                    pass
+            products.clear()
+            print('Sorting process for warehouse C is complete.')
+
+        elif warenum == '4' and rownum in range(8):
+            for productid in ware.warehouse4[rownum]:
+                for items in productid:
+                    if items != '':
+                        products.append(items)
+            for ids in products:
+                refpos = ref[ids]
+                dref = Decoder(refpos)
+                position = self.b.memory[ids]
+                if dref not in self.b.existingPos:
+                    d = Decoder(position)
+                    if position[0] == '1':
+                        ware.warehouse1[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '2':
+                        ware.warehouse2[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '3':
+                        ware.warehouse3[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '4':
+                        ware.warehouse4[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '5':
+                        ware.warehouse5[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[ids] = refpos
+                    self.b.existingPos.append(refpos)         
+                    if refpos[0] == '1':    
+                        ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '2':
+                        ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '3':
+                        ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        print(1)
+                    elif refpos[0] == '4':
+                        ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '5':
+                        ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                else:
+                    pass
+            products.clear()
+            print('Sorting process for warehouse D is complete.')
+
+        elif warenum == '5' and rownum in range(20):
+            for productid in ware.warehouse5[rownum]:
+                for items in productid:
+                    if items != '':
+                        products.append(items)
+            for ids in products:
+                refpos = ref[ids]
+                dref = Decoder(refpos)
+                position = self.b.memory[ids]
+                if dref not in self.b.existingPos:
+                    d = Decoder(position)
+                    if position[0] == '1':
+                        ware.warehouse1[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '2':
+                        ware.warehouse2[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '3':
+                        ware.warehouse3[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '4':
+                        ware.warehouse4[d.Row][d.Y][d.X] = ''
+                    elif position[0] == '5':
+                        ware.warehouse5[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[ids] = refpos
+                    self.b.existingPos.append(refpos)         
+                    if refpos[0] == '1':    
+                        ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '2':
+                        ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '3':
+                        ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '4':
+                        ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                    elif refpos[0] == '5':
+                        ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                else:
+                    pass
+            products.clear()
+            print('Sorting process for warehouse E is complete.')
+        else:
+            print('That row does not exist')
         self.command()
         
-        
-
     def RetrieveBelt(self):
         if self.Code == '30000':
             item = self.c.retrievebelt()
@@ -359,4 +478,3 @@ class Commands:
         
 
 c = Commands()
-
