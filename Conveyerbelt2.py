@@ -6,7 +6,7 @@ class conveyerbelt:
     def isEmpty(self):
         return self.items == []
 
-    def insert(self,item):
+    def inserttobelt(self,item):
         self.items.insert(0,item)
 
     def retrievebelt(self):
@@ -14,5 +14,9 @@ class conveyerbelt:
 
     def size(self):
         return len(self.items)
-
+    
+'''c = conveyerbelt()
+c.insert('b')
+c.insert('c')
+print(c.retrievebelt())'''
 

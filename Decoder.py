@@ -40,7 +40,9 @@ class Decoder:
         else:
             self.rownum = int(self.location[2:4]) - 1
 
-
+'''d = Decoder('5051021')
+print(d.Row,d.Y,d.X)
+print(d.X in range(20))'''
 
 
 
