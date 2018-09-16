@@ -9,6 +9,11 @@ class Barcode:
         self.position = ''
         self.ProductID = ''
         self.existingPos = []
+        self.w1total = 0
+        self.w2total = 0
+        self.w3total = 0
+        self.w4total = 0
+        self.w5total = 0
     
     def ConvertProductID(self,ID):
         self.ProductID = ID

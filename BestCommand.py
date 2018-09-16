@@ -86,6 +86,7 @@ class Commands:
             print('Moving from A to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
+            self.b.w1total -= 1
             self.c.inserttobelt(productid)
             self.command()
         
@@ -100,6 +101,7 @@ class Commands:
             print('Moving from A to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
+            self.b.w2total -= 1
             self.c.inserttobelt(productid)
             self.command()
         
@@ -114,6 +116,7 @@ class Commands:
             print('Moving from A to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
+            self.b.w3total -= 1
             self.c.inserttobelt(productid)
             self.command()
         
@@ -130,6 +133,7 @@ class Commands:
             print('Moving from A to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
+            self.b.w4total -= 1
             self.c.inserttobelt(productid)
             self.command()
         
@@ -146,6 +150,7 @@ class Commands:
             print('Moving from A to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
+            self.b.w5total -= 1
             self.c.inserttobelt(productid)
             self.command()
         
@@ -172,6 +177,7 @@ class Commands:
 
         if position[0] == '1' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse1[d.Row][d.Y][d.X] = productid
+            self.b.w1total += 1
             print('Moving from Belt to A')
             print('Storing a product id ' + productid + ' in Warehouse A: row '+ str(int(d.Row)) + ' slot ' + str(d.X))
             print('Moving from A to Start')
@@ -180,6 +186,7 @@ class Commands:
 
         elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse2[d.Row][d.Y][d.X] = productid
+            self.b.w2total += 1
             print('Moving from Belt to A')
             print('Moving from A to B')
             print('Storing a product id ' + productid + ' in Warehouse B: row '+ str(int(d.Row)) + ' slot ' + str(d.X))
@@ -190,6 +197,7 @@ class Commands:
 
         elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
             ware.warehouse3[d.Row][d.Y][d.X] = productid
+            self.b.w3total += 1
             print('Moving from Belt to A')
             print('Moving from A to C')
             print('Storing a product id ' + productid + ' in Warehouse C: row '+ str(int(d.Row)) + ' slot ' + str(d.X))
@@ -200,6 +208,7 @@ class Commands:
 
         elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
             ware.warehouse4[d.Row][d.Y][d.X] = productid
+            self.b.w4total += 1
             print('Moving from Belt to A')
             print('Moving from A to B')
             print('Moving from B to D')
@@ -212,6 +221,7 @@ class Commands:
 
         elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
             ware.warehouse5[d.Row][d.Y][d.X] = productid
+            self.b.w5total += 1
             print('Moving from Belt to A')
             print('Moving from A to B')
             print('Moving from B to E')
@@ -246,28 +256,38 @@ class Commands:
                     d = Decoder(position)
                     if position[0] == '1':
                         ware.warehouse1[d.Row][d.Y][d.X] = ''
+                        self.b.w1total -= 1
                     elif position[0] == '2':
                         ware.warehouse2[d.Row][d.Y][d.X] = ''
+                        self.b.w2total -= 1
                     elif position[0] == '3':
                         ware.warehouse3[d.Row][d.Y][d.X] = ''
+                        self.b.w3total -= 1
                     elif position[0] == '4':
                         ware.warehouse4[d.Row][d.Y][d.X] = ''
+                        self.b.w4total -= 1
                     elif position[0] == '5':
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
+                        self.b.w5total -= 1
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
                     self.b.existingPos.append(refpos)         
                     if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w1total += 1
                     elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w2total += 1
                     elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w3total += 1
                         print(1)
                     elif refpos[0] == '4':
                         ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w4total += 1
                     elif refpos[0] == '5':
                         ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w5total += 1
                 else:
                     pass
             products.clear()
@@ -287,28 +307,38 @@ class Commands:
                     d = Decoder(position)
                     if position[0] == '1':
                         ware.warehouse1[d.Row][d.Y][d.X] = ''
+                        self.b.w1total -= 1
                     elif position[0] == '2':
                         ware.warehouse2[d.Row][d.Y][d.X] = ''
+                        self.b.w2total -= 1
                     elif position[0] == '3':
                         ware.warehouse3[d.Row][d.Y][d.X] = ''
+                        self.b.w3total -= 1
                     elif position[0] == '4':
                         ware.warehouse4[d.Row][d.Y][d.X] = ''
+                        self.b.w4total -= 1
                     elif position[0] == '5':
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
+                        self.b.w5total -= 1
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
                     self.b.existingPos.append(refpos)         
                     if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w1total += 1
                     elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w2total += 1
                     elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w3total += 1
                         print(1)
                     elif refpos[0] == '4':
                         ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w4total += 1
                     elif refpos[0] == '5':
                         ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w5total += 1
                 else:
                     pass
             products.clear()
@@ -328,28 +358,38 @@ class Commands:
                     d = Decoder(position)
                     if position[0] == '1':
                         ware.warehouse1[d.Row][d.Y][d.X] = ''
+                        self.b.w1total -= 1
                     elif position[0] == '2':
                         ware.warehouse2[d.Row][d.Y][d.X] = ''
+                        self.b.w2total -= 1
                     elif position[0] == '3':
                         ware.warehouse3[d.Row][d.Y][d.X] = ''
+                        self.b.w3total -= 1
                     elif position[0] == '4':
                         ware.warehouse4[d.Row][d.Y][d.X] = ''
+                        self.b.w4total -= 1
                     elif position[0] == '5':
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
+                        self.b.w5total -= 1
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
                     self.b.existingPos.append(refpos)         
                     if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w1total += 1
                     elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w2total += 1
                     elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w3total += 1
                         print(1)
                     elif refpos[0] == '4':
                         ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w4total += 1
                     elif refpos[0] == '5':
                         ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w5total += 1
                 else:
                     pass
             products.clear()
@@ -369,28 +409,38 @@ class Commands:
                     d = Decoder(position)
                     if position[0] == '1':
                         ware.warehouse1[d.Row][d.Y][d.X] = ''
+                        self.b.w1total -= 1
                     elif position[0] == '2':
                         ware.warehouse2[d.Row][d.Y][d.X] = ''
+                        self.b.w2total -= 1
                     elif position[0] == '3':
                         ware.warehouse3[d.Row][d.Y][d.X] = ''
+                        self.b.w3total -= 1
                     elif position[0] == '4':
                         ware.warehouse4[d.Row][d.Y][d.X] = ''
+                        self.b.w4total -= 1
                     elif position[0] == '5':
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
+                        self.b.w5total -= 1
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
                     self.b.existingPos.append(refpos)         
                     if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w1total += 1
                     elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w2total += 1
                     elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w3total += 1
                         print(1)
                     elif refpos[0] == '4':
                         ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w4total += 1
                     elif refpos[0] == '5':
                         ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w5total += 1
                 else:
                     pass
             products.clear()
@@ -410,27 +460,38 @@ class Commands:
                     d = Decoder(position)
                     if position[0] == '1':
                         ware.warehouse1[d.Row][d.Y][d.X] = ''
+                        self.b.w1total -= 1
                     elif position[0] == '2':
                         ware.warehouse2[d.Row][d.Y][d.X] = ''
+                        self.b.w2total -= 1
                     elif position[0] == '3':
                         ware.warehouse3[d.Row][d.Y][d.X] = ''
+                        self.b.w3total -= 1
                     elif position[0] == '4':
                         ware.warehouse4[d.Row][d.Y][d.X] = ''
+                        self.b.w4total -= 1
                     elif position[0] == '5':
                         ware.warehouse5[d.Row][d.Y][d.X] = ''
+                        self.b.w5total -= 1
                     self.b.existingPos.remove(position)
                     self.b.memory[ids] = refpos
                     self.b.existingPos.append(refpos)         
                     if refpos[0] == '1':    
                         ware.warehouse1[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w1total += 1
                     elif refpos[0] == '2':
                         ware.warehouse2[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w2total += 1
                     elif refpos[0] == '3':
                         ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w3total += 1
+                        print(1)
                     elif refpos[0] == '4':
                         ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w4total += 1
                     elif refpos[0] == '5':
                         ware.warehouse5[dref.Row][dref.Y][dref.X] = ids
+                        self.b.w5total += 1
                 else:
                     pass
             products.clear()
@@ -457,7 +518,85 @@ class Commands:
 
     def Output(self):
         if self.Code == '40000':
-            self.w.outputwarehouse()
+            #self.w.outputwarehouse()
+            productid = self.b.memory.keys()
+            rowid = []
+            rownum = 1
+            print('Warehouse A')
+            print('Number of rows: 5')
+            print('Number of total products: ' + str(self.b.w1total))
+            for rows in self.w.warehouse1:
+                try:
+                    for shelfs in rows:
+                        for items in shelfs:
+                            if items in productid:
+                                rowid.append(items)
+                    print('Product in row '+ str(rownum) + ': id ' + ' '.join(rowid))
+                    rowid.clear()
+                except:
+                    print('Product in row '+ str(rownum) + ': id -')
+                rownum += 1
+            rownum = 1
+
+            print('Warehouse B')
+            print('Number of rows: 5')
+            print('Number of total products: ' + str(self.b.w2total))
+            for rows in self.w.warehouse2:
+                try:
+                    for shelfs in rows:
+                        for items in shelfs:
+                            if items in productid:
+                                rowid.append(items)
+                    print('Product in row '+ str(rownum) + ': id ' + ' '.join(rowid))
+                    rowid.clear()
+                except:
+                    print('Product in row '+ str(rownum) + ': id -')
+                rownum += 1
+            rownum = 1
+            print('Warehouse C')
+            print('Number of rows: 5')
+            print('Number of total products: ' + str(self.b.w3total))
+            for rows in self.w.warehouse3:
+                try:
+                    for shelfs in rows:
+                        for items in shelfs:
+                            if items in productid:
+                                rowid.append(items)
+                    print('Product in row '+ str(rownum) + ': id ' + ' '.join(rowid))
+                    rowid.clear()
+                except:
+                    print('Product in row '+ str(rownum) + ': id -')
+                rownum += 1
+            rownum = 1
+            print('Warehouse D')
+            print('Number of rows: 7')
+            print('Number of total products: ' + str(self.b.w4total))
+            for rows in self.w.warehouse4:
+                try:
+                    for shelfs in rows:
+                        for items in shelfs:
+                            if items in productid:
+                                rowid.append(items)
+                    print('Product in row '+ str(rownum) + ': id ' + ' '.join(rowid))
+                    rowid.clear()
+                except:
+                    print('Product in row '+ str(rownum) + ': id -')
+                rownum += 1
+            rownum = 1
+            print('Warehouse E')
+            print('Number of rows: 20')
+            print('Number of total products: ' + str(self.b.w5total))
+            for rows in self.w.warehouse5:
+                try:
+                    for shelfs in rows:
+                        for items in shelfs:
+                            if items in productid:
+                                rowid.append(items)
+                    print('Product in row '+ str(rownum) + ': id ' + ' '.join(rowid))
+                    rowid.clear()
+                except:
+                    print('Product in row '+ str(rownum) + ': id -')
+                rownum += 1
             self.command()
         else:
             print('Command is not recognized')
@@ -487,27 +626,37 @@ class Commands:
             position = self.b.memory[productid]
             d = Decoder(position)
             if position[0] == '1':
+                self.b.w1total -= 1
                 ware.warehouse1[d.Row][d.Y][d.X] = ''
             elif position[0] == '2':
+                self.b.w2total -= 1
                 ware.warehouse2[d.Row][d.Y][d.X] = ''
             elif position[0] == '3':
+                self.b.w3total -= 1
                 ware.warehouse3[d.Row][d.Y][d.X] = ''
             elif position[0] == '4':
+                self.b.w4total -= 1
                 ware.warehouse4[d.Row][d.Y][d.X] = ''
             elif position[0] == '5':
+                self.b.w5total -= 1
                 ware.warehouse5[d.Row][d.Y][d.X] = ''
             self.b.existingPos.remove(position)
             self.b.memory[productid] = newpos
             d2 = Decoder(newpos)
             if  newpos[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                self.b.w1total += 1
                 ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
             elif newpos[0] == '2' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                self.b.w2total += 1
                 ware.warehouse2[d2.Row][d2.Y][d2.X] = productid
             elif newpos[0] == '3' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                self.b.w3total += 1
                 ware.warehouse3[d2.Row][d2.Y][d2.X] = productid
             elif newpos[0] == '4' and d2.Row in range(7) and d2.Y in range(6) and d2.X in range(6):
+                self.b.w4total += 1
                 ware.warehouse4[d2.Row][d2.Y][d2.X] = productid
             elif newpos[0] == '5' and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
+                self.b.w5total += 1
                 ware.warehouse5[d2.Row][d2.Y][d2.X] = productid
             self.b.existingPos.append(newpos)
             print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Y:' + str(d2.Y) + ' X:' + str(d2.X))
@@ -538,6 +687,5 @@ class Commands:
 
     def leave(self):
         return(0)
-
-               
+                  
 c = Commands()
