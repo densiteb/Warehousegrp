@@ -623,6 +623,7 @@ class Commands:
             try:
                 position = self.b.memory[productid]
                 d = Decoder(position)
+                print(d.Row)
                 print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
                 self.command()
             except:
@@ -639,76 +640,77 @@ class Commands:
         position = self.b.memory[productid]
         d2 = Decoder(newpos + '00000')
         d = Decoder(position)
-        if newpos in self.b.existingPos:
+        if d2.barcode in self.b.existingPos:
             print('Slot is occupied. Failed to move')
             self.command()
             
-        if productid in self.b.memory and newpos not in self.b.existingPos and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
+        if productid in self.b.memory and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
             try: 
                 if position[0] == '1' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
                     self.b.w1total -= 1
                     ware.warehouse1[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
-                    self.b.memory[productid] = newpos
+                    self.b.memory[productid] = d2.barcode
                 elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
                     self.b.w2total -= 1
                     ware.warehouse2[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
-                    self.b.memory[productid] = newpos
+                    self.b.memory[productid] = d2.barcode
                 elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
                     self.b.w3total -= 1
                     ware.warehouse3[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
-                    self.b.memory[productid] = newpos
+                    self.b.memory[productid] = d2.barcode
                 elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
                     self.b.w4total -= 1
                     ware.warehouse4[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
-                    self.b.memory[productid] = newpos
+                    self.b.memory[productid] = d2.barcode
                 elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
                     self.b.w5total -= 1
                     ware.warehouse5[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
-                    self.b.memory[productid] = newpos
-                
+                    self.b.memory[productid] = d2.barcode
+                    print(0)
+                print(1)
                 if  newpos[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
                     self.b.w1total += 1
                     ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
-                    self.b.existingPos.append(newpos)
+                    self.b.existingPos.append(d2.barcode)
                     print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
                     self.command()
                 elif newpos[0] == '2' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
                     self.b.w2total += 1
                     ware.warehouse2[d2.Row][d2.Y][d2.X] = productid
-                    self.b.existingPos.append(newpos)
+                    self.b.existingPos.append(d2.barcode)
                     print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
                     self.command()
                 elif newpos[0] == '3' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
                     self.b.w3total += 1
                     ware.warehouse3[d2.Row][d2.Y][d2.X] = productid
-                    self.b.existingPos.append(newpos)
+                    self.b.existingPos.append(d2.barcode)
                     print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
                     self.command()
                 elif newpos[0] == '4' and d2.Row in range(7) and d2.Y in range(6) and d2.X in range(6):
                     self.b.w4total += 1
                     ware.warehouse4[d2.Row][d2.Y][d2.X] = productid
-                    self.b.existingPos.append(newpos)
+                    self.b.existingPos.append(d2.barcode)
                     print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
                     self.command()
                 elif newpos[0] == '5' and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
                     self.b.w5total += 1
                     ware.warehouse5[d2.Row][d2.Y][d2.X] = productid
-                    self.b.existingPos.append(newpos)
+                    self.b.existingPos.append(d2.barcode)
                     print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
                     self.command()
                 else:
-                    ('Slot does not exist.')
+                    print('Slot does not exist.')
                     self.command()
             except:
                 print('Oops something went wrong!')
                 self.command()
         else:
-            print('Product not found')
+            print('Oops something went wrong!')
             self.command()
     
     def help(self):
