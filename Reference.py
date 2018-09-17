@@ -1,6 +1,4 @@
 from pandas import pandas
-from Mainwarehouse import Warehouse
-from Conveyerbelt2 import conveyerbelt
 import NewWarehouse as NW
 class Referto:
     
@@ -9,6 +7,7 @@ class Referto:
         self.position = ''
         self.ProductID = ''
         self.existingPos = []
+        self.posidref = {}
         for ids in NW.generateProduct():
             self.ConvertProductID(ids)
     
@@ -23,6 +22,7 @@ class Referto:
         else:
             self.StoreWarehouse5()
         self.reference[self.ProductID] = self.position
+        self.posidref[self.position] = self.ProductID
         self.existingPos.append(self.position)
 
     def StoreWarehouse1(self):
@@ -92,4 +92,4 @@ class Referto:
             
                 
 '''c = Referto()
-print(c.reference['Y599'])'''
+print(c.reference['B111'])'''
