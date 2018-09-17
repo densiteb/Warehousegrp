@@ -74,17 +74,17 @@ class Decoder:
     def decodeSlotnum(self):
         if self.wnum == '1' or self.wnum == '2' or self.wnum == '3':
             if self.Y == 0:
-                self.slotnum = self.X
+                self.slotnum = self.X + 1
             else:
                 self.slotnum = (10 * (self.Y)) + (self.X +1)
         elif self.wnum == '4':
             if self.Y == 0:
-                self.slotnum = self.X
+                self.slotnum = self.X + 1
             else:
                 self.slotnum = 5 * self.Y  + (self.X + 1)
         elif self.wnum == '5':
             if self.Y == 0:
-                self.slotnum = self.X
+                self.slotnum = self.X + 1
             else:
                 self.slotnum = 20 * self.Y + (self.X + 1)
 
@@ -97,20 +97,20 @@ class Decoder:
                 self.Row = int(self.location[1:3]) - 1
             
             if self.wnum == '1' or self.wnum == '2' or self.wnum == '3':
-                self.Y = int(self.location[3:]) // 10
-                self.X = (int(self.location[3:]) % 10) 
+                self.Y = (int(self.location[3:]) - 1) // 10
+                self.X = (int(self.location[3:]) - 1) % 10 
                 if self.Y == 10 and self.X == 0:
                     self.X = 9
                     self.Y = 9
             elif self.wnum == '4':
-                self.Y = int(self.location[3:])// 5
-                self.X = (int(self.location[3:]) % 5) 
+                self.Y = (int(self.location[3:]) - 1) // 5
+                self.X = (int(self.location[3:]) - 1) % 5 
                 if self.Y == 5 and self.X == 0:
                     self.Y = 4
                     self.X = 4
             elif self.wnum == '5':
-                self.Y = int(self.location[3:])// 20  
-                self.X = (int(self.location[3:]) % 20) 
+                self.Y = (int(self.location[3:]) - 1) // 20  
+                self.X = (int(self.location[3:]) - 1) % 20
                 '''if self.Y == 20 and self.X == 0:
                     self.Y = 19
                     self.X = 19'''
@@ -119,7 +119,7 @@ class Decoder:
             pass
  
 
-posx = []
+'''posx = []
 posy = []
 id = -1
 for ids in range(25):
@@ -128,7 +128,7 @@ for ids in range(25):
     print(d.Y,d.X)
     posx.append(d.X)
     posy.append(d.Y)
-print(len(posx))
+print(len(posx))'''
 
 
 

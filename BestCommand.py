@@ -289,7 +289,7 @@ class Commands:
                             elif refpos[0] == '3':
                                 ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w3total += 1
-                                print(1)
+                           
                             elif refpos[0] == '4':
                                 ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w4total += 1
@@ -341,7 +341,7 @@ class Commands:
                             elif refpos[0] == '3':
                                 ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w3total += 1
-                                print(1)
+                    
                             elif refpos[0] == '4':
                                 ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w4total += 1
@@ -393,7 +393,7 @@ class Commands:
                             elif refpos[0] == '3':
                                 ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w3total += 1
-                                print(1)
+                   
                             elif refpos[0] == '4':
                                 ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w4total += 1
@@ -445,7 +445,7 @@ class Commands:
                             elif refpos[0] == '3':
                                 ware.warehouse3[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w3total += 1
-                                print(1)
+                        
                             elif refpos[0] == '4':
                                 ware.warehouse4[dref.Row][dref.Y][dref.X] = ids
                                 self.b.w4total += 1
@@ -529,7 +529,8 @@ class Commands:
 
     def Output(self):
         if self.Code == '40000':
-            #self.w.outputwarehouse()
+            self.w.outputwarehouse()
+            '''
             productid = self.b.memory.keys()
             rowid = []
             rownum = 1
@@ -609,6 +610,7 @@ class Commands:
                     print('Product in row '+ str(rownum) + ': id -')
                 rownum += 1
             self.command()
+            '''
         else:
             print('Command is not recognized')
             self.help()
@@ -619,11 +621,10 @@ class Commands:
         if  productid not in self.b.memory or productid in self.c.items:
             print('Product not found.')
             self.command()
-        elif self.b.memory[productid]:
+        elif productid in self.b.memory:
             try:
                 position = self.b.memory[productid]
                 d = Decoder(position)
-                print(d.Row)
                 print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
                 self.command()
             except:
@@ -671,8 +672,8 @@ class Commands:
                     ware.warehouse5[d.Row][d.Y][d.X] = ''
                     self.b.existingPos.remove(position)
                     self.b.memory[productid] = d2.barcode
-                    print(0)
-                print(1)
+                
+    
                 if  newpos[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
                     self.b.w1total += 1
                     ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
@@ -720,17 +721,17 @@ class Commands:
         print('    30000 - Retrieve a product from the belt.')
         print('    40000 - Output information of all houses.')
         print('    5ABCD - Search for product ABCD.                 // A[A-Y] B[1-5] C[0-9] D[0-9]')
-        print('9ABCDEFGH - Manually move a product ABCD to EFGH. // A[A-Y] B[1-5] C[0-9] D[0-9] E[A-Y] F[1-5] G[0-9] H[0-9] ')
+        print( '9ABCDEFG - Manually move a product ABCD to EFGH. // A[A-Y] B[1-5] C[0-9] D[0-9] E[1-5] F[01-20] G[1-400]')
         print(' examples - Show examples of each command.')
         self.command()
 
     def examples(self):
-        print('    0a100 = Retrieve product A100.')
-        print('    1a100 = Store product A100.')
-        print('   210100 = Sort warehouse 1 at row 1.')
-        print('    30000 = Retrieve a product from the belt.')
-        print('    40000 = Output warehouse information.')
-        print('9a100a125 = Place product a100 at slot for A125.')
+        print('      0a100 = Retrieve product A100.')
+        print('      1a100 = Store product A100.')
+        print('     210100 = Sort warehouse 1 at row 1.')
+        print('      30000 = Retrieve a product from the belt.')
+        print('      40000 = Output warehouse information.')
+        print('9a100520400 = Place product a100 at warehouse 5 row 20 slot number 400.')
         self.command()
 
     def __fillthefuckingWarehouse__(self):
