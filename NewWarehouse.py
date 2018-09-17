@@ -29,6 +29,8 @@ def generateProduct():
             firstnum = -1
     return productid
 
+
+
 '''
 ware1 = 0
 ware2 = 0

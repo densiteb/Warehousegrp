@@ -8,6 +8,9 @@ class Referto:
         self.ProductID = ''
         self.existingPos = []
         self.posidref = {}
+        self.idslot = {}
+        self.slotid = {}
+
         for ids in NW.generateProduct():
             self.ConvertProductID(ids)
     
@@ -89,7 +92,8 @@ class Referto:
                                                                 if self.position in self.existingPos:
             #Row Shift 15 Y shift 10 X Shift 10
                                                                     self.position = str(wnum) + str(int(ID[1]) + 15) + str(int(ID[2]) + 10) + str(int(ID[3]) + 10)
+ 
             
                 
 '''c = Referto()
-print(c.reference['B111'])'''
+print(c.reference['A599'])'''

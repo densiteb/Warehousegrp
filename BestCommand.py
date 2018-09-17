@@ -53,7 +53,7 @@ class Commands:
             self.Output()
         elif Code == '5' and len(self.Code) == 5 and self.Code[1] in self.alpha and self.Code[2:].isdigit():
             self.Search()
-        elif Code == '9' and len(self.Code) == 9 and self.Code[1] in self.alpha:
+        elif Code == '9' and len(self.Code) >= 8 and len(self.Code) <= 11 and self.Code[1] in self.alpha:
             self.Manual()
         else:
             print('Command is not recognized.')
@@ -89,7 +89,7 @@ class Commands:
             self.b.existingPos.remove(position)
             self.b.memory[productid] = 'On the belt'
             print('Moving from Belt to Warehouse 1')
-            print('Getting a product id ' + productid + ' in Warehouse 1: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.X))
+            print('Getting a product id ' + productid + ' in Warehouse 1: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 1 to Start')
             print('Placing product id ' + productid + ' on the belt. ')
             print('Retrieving Successfully!')
@@ -103,7 +103,7 @@ class Commands:
             self.b.memory[productid] = 'On the belt'
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
-            print('Getting a product id ' + productid + ' in Warehouse Warehouse 2: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.X))
+            print('Getting a product id ' + productid + ' in Warehouse Warehouse 2: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
             print('Placing product id ' + productid + ' on the belt. ')
@@ -118,7 +118,7 @@ class Commands:
             self.b.memory[productid] = 'On the belt'
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 3')
-            print('Getting a product id ' + productid + ' in Warehouse C: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.X))
+            print('Getting a product id ' + productid + ' in Warehouse C: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 3 to Warehouse 1' )
             print('Moving from Warehouse 1 to Start')
             print('Placing product id ' + productid + ' on the belt. ')
@@ -134,7 +134,7 @@ class Commands:
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 4')
-            print('Getting a product id ' + productid + ' in Warehouse D: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.X))
+            print('Getting a product id ' + productid + ' in Warehouse D: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 4 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
@@ -151,7 +151,7 @@ class Commands:
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 5')
-            print('Getting a product id ' + productid + ' in Warehouse 5: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.X))
+            print('Getting a product id ' + productid + ' in Warehouse 5: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 5 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
@@ -186,7 +186,7 @@ class Commands:
             ware.warehouse1[d.Row][d.Y][d.X] = productid
             self.b.w1total += 1
             print('Moving from Belt to Warehouse 1')
-            print('Storing a product id ' + productid + ' in Warehouse Warehouse 1: row '+ str(int(d.Row) + 1) + ' slot ' + self.ref.posidref[position])
+            print('Storing a product id ' + productid + ' in Warehouse Warehouse 1: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 1 to Start')
             print('Storing Successfully!')
             self.command()
@@ -196,7 +196,7 @@ class Commands:
             self.b.w2total += 1
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
-            print('Storing a product id ' + productid + ' in Warehouse 2: row '+ str(int(d.Row) + 1) + ' slot ' + self.ref.posidref[position])
+            print('Storing a product id ' + productid + ' in Warehouse 2: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
             print('Storing Successfully!')
@@ -207,7 +207,7 @@ class Commands:
             self.b.w3total += 1
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 3')
-            print('Storing a product id ' + productid + ' in Warehouse 3: row '+ str(int(d.Row) + 1) + ' slot ' + self.ref.posidref[position])
+            print('Storing a product id ' + productid + ' in Warehouse 3: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 3 to Warehouse 1' )
             print('Moving from Warehouse 1 to Start')
             print('Storing Successfully!')
@@ -219,7 +219,7 @@ class Commands:
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 4')
-            print('Storing a product id ' + productid + ' in Warehouse 4: row '+ str(int(d.Row) + 1) + ' predetermined overflow slot.' )
+            print('Storing a product id ' + productid + ' in Warehouse 4: row '+ str(int(d.Row) + 1) + str(d.slotnum) )
             print('Moving from Warehouse 4 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
@@ -232,7 +232,7 @@ class Commands:
             print('Moving from Belt to Warehouse 1')
             print('Moving from Warehouse 1 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 5')
-            print('Storing a product id ' + productid + ' in Warehouse 5: row '+ str(int(d.Row) + 1) + ' slot ' + self.ref.posidref[position])
+            print('Storing a product id ' + productid + ' in Warehouse 5: row '+ str(int(d.Row) + 1) + ' slot ' + str(d.slotnum))
             print('Moving from Warehouse 5 to Warehouse 2')
             print('Moving from Warehouse 2 to Warehouse 1')
             print('Moving from Warehouse 1 to Start')
@@ -623,10 +623,10 @@ class Commands:
             try:
                 position = self.b.memory[productid]
                 d = Decoder(position)
-                print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + self.ref.posidref[position])
+                print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
                 self.command()
             except:
-                print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot: Designated Overflow Slot')
+                print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
                 self.command()
         else:
             print('Product not found.')
@@ -635,77 +635,80 @@ class Commands:
     def Manual(self):
         ware = self.w
         productid = self.Code[1:5]
-        newpos = self.ref.reference[self.Code[5:]]
+        newpos = self.Code[5:]
         position = self.b.memory[productid]
-        d2 = Decoder(newpos)
+        d2 = Decoder(newpos + '00000')
         d = Decoder(position)
         if newpos in self.b.existingPos:
             print('Slot is occupied. Failed to move')
             self.command()
             
         if productid in self.b.memory and newpos not in self.b.existingPos and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
-            
-            if position[0] == '1' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
-                self.b.w1total -= 1
-                ware.warehouse1[d.Row][d.Y][d.X] = ''
-                self.b.existingPos.remove(position)
-                self.b.memory[productid] = newpos
-            elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
-                self.b.w2total -= 1
-                ware.warehouse2[d.Row][d.Y][d.X] = ''
-                self.b.existingPos.remove(position)
-                self.b.memory[productid] = newpos
-            elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
-                self.b.w3total -= 1
-                ware.warehouse3[d.Row][d.Y][d.X] = ''
-                self.b.existingPos.remove(position)
-                self.b.memory[productid] = newpos
-            elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
-                self.b.w4total -= 1
-                ware.warehouse4[d.Row][d.Y][d.X] = ''
-                self.b.existingPos.remove(position)
-                self.b.memory[productid] = newpos
-            elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
-                self.b.w5total -= 1
-                ware.warehouse5[d.Row][d.Y][d.X] = ''
-                self.b.existingPos.remove(position)
-                self.b.memory[productid] = newpos
-            
-            if  newpos[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
-                self.b.w1total += 1
-                ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
-                self.b.existingPos.append(newpos)
-                print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Slot:' + self.ref.posidref[newpos])
-                self.command()
-            elif newpos[0] == '2' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
-                self.b.w2total += 1
-                ware.warehouse2[d2.Row][d2.Y][d2.X] = productid
-                self.b.existingPos.append(newpos)
-                print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Slot:' + self.ref.posidref[newpos])
-                self.command()
-            elif newpos[0] == '3' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
-                self.b.w3total += 1
-                ware.warehouse3[d2.Row][d2.Y][d2.X] = productid
-                self.b.existingPos.append(newpos)
-                print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Slot:' + self.ref.posidref[newpos])
-                self.command()
-            elif newpos[0] == '4' and d2.Row in range(7) and d2.Y in range(6) and d2.X in range(6):
-                self.b.w4total += 1
-                ware.warehouse4[d2.Row][d2.Y][d2.X] = productid
-                self.b.existingPos.append(newpos)
-                print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Slot:Designated overflow slot')
-                self.command()
-            elif newpos[0] == '5' and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
-                self.b.w5total += 1
-                ware.warehouse5[d2.Row][d2.Y][d2.X] = productid
-                self.b.existingPos.append(newpos)
-                print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(d2.Row) + ' Slot:' + self.ref.posidref[newpos])
-                self.command()
-            else:
-                ('Slot does not exist.')
+            try: 
+                if position[0] == '1' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
+                    self.b.w1total -= 1
+                    ware.warehouse1[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[productid] = newpos
+                elif position[0] == '2' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
+                    self.b.w2total -= 1
+                    ware.warehouse2[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[productid] = newpos
+                elif position[0] == '3' and d.Row in range(5) and d.Y in range(10) and d.X in range(10):
+                    self.b.w3total -= 1
+                    ware.warehouse3[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[productid] = newpos
+                elif position[0] == '4' and d.Row in range(7) and d.Y in range(6) and d.X in range(6):
+                    self.b.w4total -= 1
+                    ware.warehouse4[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[productid] = newpos
+                elif position[0] == '5' and d.Row in range(20) and d.Y in range(20) and d.X in range(20):
+                    self.b.w5total -= 1
+                    ware.warehouse5[d.Row][d.Y][d.X] = ''
+                    self.b.existingPos.remove(position)
+                    self.b.memory[productid] = newpos
+                
+                if  newpos[0] == '1' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                    self.b.w1total += 1
+                    ware.warehouse1[d2.Row][d2.Y][d2.X] = productid
+                    self.b.existingPos.append(newpos)
+                    print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
+                    self.command()
+                elif newpos[0] == '2' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                    self.b.w2total += 1
+                    ware.warehouse2[d2.Row][d2.Y][d2.X] = productid
+                    self.b.existingPos.append(newpos)
+                    print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
+                    self.command()
+                elif newpos[0] == '3' and d2.Row in range(5) and d2.Y in range(10) and d2.X in range(10):
+                    self.b.w3total += 1
+                    ware.warehouse3[d2.Row][d2.Y][d2.X] = productid
+                    self.b.existingPos.append(newpos)
+                    print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
+                    self.command()
+                elif newpos[0] == '4' and d2.Row in range(7) and d2.Y in range(6) and d2.X in range(6):
+                    self.b.w4total += 1
+                    ware.warehouse4[d2.Row][d2.Y][d2.X] = productid
+                    self.b.existingPos.append(newpos)
+                    print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
+                    self.command()
+                elif newpos[0] == '5' and d2.Row in range(20) and d2.Y in range(20) and d2.X in range(20):
+                    self.b.w5total += 1
+                    ware.warehouse5[d2.Row][d2.Y][d2.X] = productid
+                    self.b.existingPos.append(newpos)
+                    print('Move Product ' + productid + ' to Warehouse:' + str(d2.wnum) + ' Row:' + str(int(d2.Row) + 1) + ' Slot:' + str(d2.slotnum))
+                    self.command()
+                else:
+                    ('Slot does not exist.')
+                    self.command()
+            except:
+                print('Oops something went wrong!')
                 self.command()
         else:
-            print('Product not found.')
+            print('Product not found')
             self.command()
     
     def help(self):
