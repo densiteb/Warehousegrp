@@ -1,6 +1,4 @@
 from pandas import pandas
-from pprint import pprint
-import numpy
 import string
 class Warehouse:
     def __init__(self):

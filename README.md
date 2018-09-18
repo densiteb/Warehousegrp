@@ -20,6 +20,6 @@ File checklist:
 'Warehouse.bat'
 
 -Python 3.6
--
+-Library Pandas and string required.
 
 
