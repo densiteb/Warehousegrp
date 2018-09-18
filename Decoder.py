@@ -99,15 +99,15 @@ class Decoder:
             if self.wnum == '1' or self.wnum == '2' or self.wnum == '3':
                 self.Y = (int(self.location[3:]) - 1) // 10
                 self.X = (int(self.location[3:]) - 1) % 10 
-                if self.Y == 10 and self.X == 0:
+                '''if self.Y == 10 and self.X == 0:
                     self.X = 9
-                    self.Y = 9
+                    self.Y = 9'''
             elif self.wnum == '4':
                 self.Y = (int(self.location[3:]) - 1) // 5
                 self.X = (int(self.location[3:]) - 1) % 5 
-                if self.Y == 5 and self.X == 0:
+                '''if self.Y == 5 and self.X == 0:
                     self.Y = 4
-                    self.X = 4
+                    self.X = 4'''
             elif self.wnum == '5':
                 self.Y = (int(self.location[3:]) - 1) // 20  
                 self.X = (int(self.location[3:]) - 1) % 20
