@@ -23,12 +23,12 @@ class Commands:
         self.Code = command.upper()
         if self.Code == 'HELP':
             self.help()
-        elif self.Code == 'LEAVE':
-            self.leave()
+        #elif self.Code == 'LEAVE':
+        #   self.leave()
         elif self.Code == 'EXAMPLES':
             self.examples()
-        elif self.Code == 'FILLTHEFUCKINGWAREHOUSE':
-            self.__fillthefuckingWarehouse__()
+        #elif self.Code == 'FILLTHEFUCKINGWAREHOUSE':
+        #   self.__fillthefuckingWarehouse__()
         else:
             self.__VerifyCommand__()
 
