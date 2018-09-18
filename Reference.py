@@ -8,8 +8,6 @@ class Referto:
         self.ProductID = ''
         self.existingPos = []
         self.posidref = {}
-        self.idslot = {}
-        self.slotid = {}
 
         for ids in NW.generateProduct():
             self.ConvertProductID(ids)

@@ -160,6 +160,7 @@ class Commands:
             self.b.w5total -= 1
             self.c.inserttobelt(productid)
             self.command()
+
         else:
             self.help()
             self.command()
