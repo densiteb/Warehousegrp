@@ -529,7 +529,9 @@ class Commands:
 
     def Output(self):
         if self.Code == '40000':
+            '''
             self.w.outputwarehouse()
+            self.command()
             '''
             productid = self.b.memory.keys()
             rowid = []
@@ -610,7 +612,7 @@ class Commands:
                     print('Product in row '+ str(rownum) + ': id -')
                 rownum += 1
             self.command()
-            '''
+            
         else:
             print('Command is not recognized')
             self.help()
@@ -733,7 +735,7 @@ class Commands:
         print('      40000 = Output warehouse information.')
         print('9a100520400 = Place product a100 at warehouse 5 row 20 slot number 400.')
         self.command()
-
+'''
     def __fillthefuckingWarehouse__(self):
         ware = self.w
         for productid in generateProduct():
@@ -804,5 +806,6 @@ class Commands:
         self.command()
     def leave(self):
         return(0)
+        '''
 
 c = Commands()
