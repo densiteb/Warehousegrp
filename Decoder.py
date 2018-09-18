@@ -7,7 +7,7 @@ class Decoder:
         self.Row = 0
         self.Y = 0
         self.X = 0
-        self.slotnum = 0 
+        self.slotnum = 0
         self.barcode = ''
         if len(ProductLocation) == 6:
             self.decodeRownum()
@@ -114,23 +114,29 @@ class Decoder:
                 '''if self.Y == 20 and self.X == 0:
                     self.Y = 19
                     self.X = 19'''
-            self.barcode = str(self.wnum) + str(int(self.Row) + 1) + str(self.Y) + str(self.X)
+            
+            if int(self.location[1]) == 0:
+                Row = '0' + str(self.location[2])
+            else:
+                Row = str(self.location[1:3])
+
+            if self.Y < 10:
+                Y = '0' + str(self.Y)
+            else:
+                Y = self.Y
+
+            if self.X < 10:
+                X = '0' + str(self.X)
+            else:
+                X = self.X
+
+            self.barcode = str(self.wnum) + Row + Y + X
         except:
             pass
  
 
-'''posx = []
-posy = []
-id = -1
-for ids in range(25):
-    id += 1
-    d = Decoder('407' + str(id) + '00000')
-    print(d.Y,d.X)
-    posx.append(d.X)
-    posy.append(d.Y)
-print(len(posx))'''
-
-
+'''d =Decoder('401100000')
+print(d.wnum,d.Row,d.Y,d.X,d.slotnum,d.barcode)'''
 
 
         

@@ -630,7 +630,7 @@ class Commands:
                 print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
                 self.command()
             except:
-                print('Found product at Warehouse:' + str(d.wnum) + ' Row:' + str(int(d.Row) + 1) + ' Slot:' + str(d.slotnum))
+                print('Oops something went wrong!')
                 self.command()
         else:
             print('Product not found.')
