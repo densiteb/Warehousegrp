@@ -129,13 +129,12 @@ class Decoder:
                 X = '0' + str(self.X)
             else:
                 X = self.X
-
-            self.barcode = str(self.wnum) + Row + Y + X
+            self.barcode = str(self.wnum) + str(Row) + str(Y) + str(X)
         except:
             pass
  
 
-'''d =Decoder('401100000')
+'''d =Decoder('52010000000')
 print(d.wnum,d.Row,d.Y,d.X,d.slotnum,d.barcode)'''
 
 
